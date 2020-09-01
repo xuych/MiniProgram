@@ -1,6 +1,8 @@
 const testMyReauest = ()=>{
   return wx.httpRequest.request({
-    url: "/"
+    url: "/",
+    loader:true,
+    text: '请勿离开'
   })
 }
 module.exports = testMyReauest

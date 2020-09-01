@@ -9,9 +9,7 @@ var host = require('../data/host')
  * @param { string/object/ArrayBuffer }  data   请求参数
  */
 class httpRequest {
-  constructor(url, loader = true) {
-    this.loader = loader
-    this.url = url
+  constructor() {
     this.defConfig = {
       data: {},
       timeout: "",
@@ -28,16 +26,16 @@ class httpRequest {
     }
   }
   request(options) {
+    if (options.loader) {
+      wx.showLoading({
+        title: options.text ? options.text :'加载中...',
+        mask: true
+      })
+    }
     let opts = {
       ...this.defConfig,
       ...options,
       url:host.host + options.url
-    }
-    if (this.loader) {
-      wx.showLoading({
-        title: '加载中...',
-        mask: true
-      })
     }
     return new Promise((resolve, reject) => {
       console.log(opts);
