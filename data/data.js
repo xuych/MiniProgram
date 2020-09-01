@@ -1,6 +1,6 @@
-const testMyReauest = (data)=>{
-  return wx.httpRequest({
-    url: ""
+const testMyReauest = ()=>{
+  return wx.httpRequest.request({
+    url: "/"
   })
 }
 module.exports = testMyReauest

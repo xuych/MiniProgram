@@ -27,11 +27,6 @@ Page({
         
       }
     })
-    testMyReauest().then((res)=>{
-      console.log(res);
-    }).catch((err)=>{
-      console.log('---err---',err);
-    })
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
@@ -49,6 +44,13 @@ Page({
         console.log(latitude,longitude,speed,accuracy)
       }
      })
+    testMyReauest().then((res)=>{
+      wx.showToast({
+        title: `请求成功，${res.msg}`,
+      })
+    }).catch((err)=>{
+      console.log('---err---',err);
+    })
   },
   onLoad: function () {
     if (app.globalData.userInfo) {

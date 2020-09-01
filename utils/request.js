@@ -1,6 +1,6 @@
-import {
-  host
-} from "../data/host";
+// import host from "../data/host";
+// const host  = "https://api.it120.cc";
+var host = require('../data/host')
 
 /**
  * 
@@ -11,9 +11,8 @@ import {
 class httpRequest {
   constructor(url, loader = true) {
     this.loader = loader
-    this.url = host + url
+    this.url = url
     this.defConfig = {
-      url: this.url,
       data: {},
       timeout: "",
       dataType: "json", // 返回的数据格式:json || text
@@ -31,7 +30,8 @@ class httpRequest {
   request(options) {
     let opts = {
       ...this.defConfig,
-      ...options
+      ...options,
+      url:host.host + options.url
     }
     if (this.loader) {
       wx.showLoading({
@@ -45,10 +45,10 @@ class httpRequest {
         ...opts,
         success: res => {
           wx.hideLoading();
-          if (res.data.code === 200) {
+          if (res.data.code === 0) {
             resolve(res.data);
           } else {
-            console.log('res.data.code !== 200');
+            console.log('res.data.code !== 0');
             reject(res);
           }
         },
@@ -67,5 +67,5 @@ class httpRequest {
   }
 }
 let instance = new httpRequest()
-wx.httpRequest = instance.request();
+wx.httpRequest = instance
 module.exports = wx.httpRequest
