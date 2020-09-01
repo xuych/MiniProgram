@@ -1,8 +1,10 @@
 //index.js
 //获取应用实例
+import testMyReauest from "../../data/data";
 const app = getApp()
 Page({
   data: {
+    loading: true,
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
@@ -10,17 +12,43 @@ Page({
   },
   //事件处理函数
   bindViewTap: function () {
-    wx.navigateTo({
+    wx.switchTab({
       url: '../logs/logs'
     })
   },
   onShow: function () {
+    wx.request({
+      url: 'https://api.it120.cc/',
+      success: (res)=>{
+        console.log(res); 
+      },
+      fail: (err)=>{
+        console.log(err);
+        
+      }
+    })
+    testMyReauest().then((res)=>{
+      console.log(res);
+    }).catch((err)=>{
+      console.log('---err---',err);
+    })
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
       this.getTabBar().setData({
         selected: 0
       })
     }
+    // 获取位置
+    wx.getLocation({
+      type: 'wgs84',
+      success (res) {
+        const latitude = res.latitude
+        const longitude = res.longitude
+        const speed = res.speed
+        const accuracy = res.accuracy
+        console.log(latitude,longitude,speed,accuracy)
+      }
+     })
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -51,7 +79,6 @@ Page({
     }
   },
   getUserInfo: function (e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
