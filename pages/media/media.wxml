@@ -1,0 +1,20 @@
+<view class="view">
+  <view class="window">
+    <image class="cover-9" src="{{tempImagePath}}" bindtap="img" wx:if="{{type=='takePhoto'}}"></image>
+    <video class="cover-9" src="{{tempVideoPath}}" poster="{{tempThumbPath}}" wx:if="{{type=='startRecord'}}"></video>
+    <view class="window-2">
+      <button bindtap="open" type="primary" data-type="takePhoto">拍照</button>
+      <button bindtap="open" type="primary" data-type="startRecord">录制</button>
+    </view>
+  </view>
+ 
+  <camera class="camera" device-position="{{device?'back':'front'}}" wx:if="{{camera}}" flash="off">
+    <cover-view class="cover-1" bindtap="camera">
+      <cover-view class="cover-2">
+        <cover-view class="cover-5" wx:if="{{type=='startRecord'&&startRecord}}">{{time}}S</cover-view>
+      </cover-view>
+    </cover-view>
+    <cover-image class="cover-3" src="../../image/icon_close.png" style="width:60rpx;height:60rpx;" bindtap="close"></cover-image>
+    <cover-image class="cover-4" src="../../image/icon_siwtch.png" style="width:60rpx;height:60rpx;" bindtap="devicePosition"></cover-image>
+  </camera>
+</view>

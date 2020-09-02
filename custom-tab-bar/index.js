@@ -13,6 +13,11 @@ Component({
       iconPath: "/image/icon_API.png",
       selectedIconPath: "/image/icon_API_HL.png",
       text: "日志"
+    }, {
+      pagePath: "/pages/media/media",
+      iconPath: "/image/icon_component.png",
+      selectedIconPath: "/image/icon_component_HL.png",
+      text: "媒体"
     }]
   },
   attached() {},
